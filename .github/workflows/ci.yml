@@ -30,13 +30,10 @@ jobs:
       - name: Verify Java version
         run: java --version
 
-      - name: Run tests
-        run: ./mvnw test
-
-      - name: Build application
-        run: ./mvnw package -DskipTests
+      - name: Build and test with coverage
+        run: ./mvnw verify -Pcoverage
 
       - name: SonarQube analysis
-        run: ./mvnw sonar:sonar
+        run: ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
