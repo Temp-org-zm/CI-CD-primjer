@@ -41,6 +41,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Show GitHub context
+        run: |
+          echo "repository=${{ github.repository }}"
+          echo "repository_owner=${{ github.repository_owner }}"
+          echo "actor=${{ github.actor }}"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
