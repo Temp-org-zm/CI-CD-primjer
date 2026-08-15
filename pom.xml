@@ -17,8 +17,8 @@
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.6</surefire-plugin.version>
 
-        <sonar.projectKey>CI-CD-primjer</sonar.projectKey>
-        <sonar.organization>Temp-org-zm</sonar.organization>
+        <sonar.projectKey>Temp-org-zm_CI-CD-primjer</sonar.projectKey>
+        <sonar.organization>temp-org-zm</sonar.organization>
     </properties>
 
     <dependencyManagement>
