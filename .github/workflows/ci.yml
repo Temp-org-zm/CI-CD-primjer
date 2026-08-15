@@ -24,16 +24,30 @@ jobs:
           java-version: '25'
           cache: maven
 
+      - name: Make Maven wrapper executable
+        run: chmod +x mvnw
+
       - name: Verify Java version
         run: java --version
 
-      - name: Run tests
-        run: ./mvnw test
+      - name: Build and test with coverage
+        run: ./mvnw verify -Pcoverage
 
-      - name: Build application
-        run: ./mvnw package -DskipTests
+      - name: Inspect JaCoCo report
+        run: |
+          echo "=== Source files ==="
+          find src -type f
+          
+          echo "=== JaCoCo reports ==="
+          find target/site/jacoco -type f
+          
+          echo "=== JaCoCo source entries ==="
+          grep -o '<source>[^<]*</source>' target/site/jacoco/jacoco.xml || true
+          
+          echo "=== JaCoCo package/class entries ==="
+          grep -o '<package name="[^"]*"' target/site/jacoco/jacoco.xml || true
 
       - name: SonarQube analysis
-        run: ./mvnw sonar:sonar
+        run: ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
