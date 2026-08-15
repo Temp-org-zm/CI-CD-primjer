@@ -59,4 +59,4 @@ jobs:
             ghcr.io/temp-org-zm/ci-cd-primjer:latest
 
       - name: Trigger Render deployment
-        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+        run: curl --fail --show-error --silent -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
