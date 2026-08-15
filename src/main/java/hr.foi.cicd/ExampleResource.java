@@ -13,6 +13,9 @@ public class ExampleResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, String> get() {
+        String password = "password123";
+        String message = "Hello, World!";
+        System.out.println("Hello, World!");
         return Map.of("message", "Resource is available");
     }
 }
