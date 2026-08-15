@@ -16,6 +16,7 @@ public class ExampleResource {
         String password = "password123";
         String message = "Hello, World!";
         System.out.println("Hello, World!");
+
         return Map.of("message", "Resource is available");
     }
 }
