@@ -33,6 +33,20 @@ jobs:
       - name: Build and test with coverage
         run: ./mvnw verify -Pcoverage
 
+      - name: Inspect JaCoCo report
+        run: |
+          echo "=== Source files ==="
+          find src -type f
+          
+          echo "=== JaCoCo reports ==="
+          find target/site/jacoco -type f
+          
+          echo "=== JaCoCo source entries ==="
+          grep -o '<source>[^<]*</source>' target/site/jacoco/jacoco.xml || true
+          
+          echo "=== JaCoCo package/class entries ==="
+          grep -o '<package name="[^"]*"' target/site/jacoco/jacoco.xml || true
+
       - name: SonarQube analysis
         run: ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         env:
