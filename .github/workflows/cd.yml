@@ -55,8 +55,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/diplomski/ci-cd-primjer:${{ github.sha }}
-            ghcr.io/diplomski/ci-cd-primjer:latest
+            ghcr.io/temp-org-zm/ci-cd-primjer:${{ github.sha }}
+            ghcr.io/temp-org-zm/ci-cd-primjer:latest
 
       - name: Trigger Render deployment
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
