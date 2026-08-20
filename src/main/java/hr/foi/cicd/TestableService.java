@@ -8,4 +8,8 @@ public class TestableService {
     public Integer sub(Integer a, Integer b) {
         return a - b;
     }
+    
+    public Integer multiply(Integer a, Integer b) {
+        return a * b;
+    }
 }
