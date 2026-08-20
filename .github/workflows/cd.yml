@@ -11,7 +11,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: temp-org-zm/ci-cd-primjer
 
 jobs:
   build-and-push:
@@ -41,12 +41,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Show GitHub context
-        run: |
-          echo "repository=${{ github.repository }}"
-          echo "repository_owner=${{ github.repository_owner }}"
-          echo "actor=${{ github.actor }}"
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
@@ -55,8 +49,10 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/temp-org-zm/ci-cd-primjer:${{ github.sha }}
-            ghcr.io/temp-org-zm/ci-cd-primjer:latest
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest
 
       - name: Trigger Render deployment
-        run: curl --fail --show-error --silent -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: curl --fail --show-error --silent --request POST "$RENDER_DEPLOY_HOOK"
