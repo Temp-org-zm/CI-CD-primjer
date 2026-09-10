@@ -12,4 +12,9 @@ public class TestableService {
     public Integer multiply(Integer a, Integer b) {
         return a * b;
     }
+
+    public Integer divide(Integer a, Integer b) {
+        return a / b;
+    }
+    
 }
